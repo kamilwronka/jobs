@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { TabNavigator, StackNavigator, TabBarBottom } from 'react-navigation';
+import { Provider } from 'react-redux';
+import store from './store';
 
 import AuthScreen from './screens/AuthScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
@@ -37,19 +39,19 @@ export default class App extends React.Component {
       }
     },
     {
-      tabBarPosition: 'bottom',
-      tabBarComponent: TabBarBottom,
-      swipeEnabled: false,
-      tabBarOptions: {
-        activeTintColor: 'tomato',
-        inactiveTintColor: 'gray',
+      navigationOptions: {
+          tabBarVisible: false
       },
+      lazy: true,
+      swipeEnabled: false,
     }
     );
     return (
-      <View style={styles.container}>
-        <MainNavigator />
-      </View>
+      <Provider store={store}>
+        <View style={styles.container}>
+          <MainNavigator />
+        </View>
+      </Provider>
     );
   }
 }
